@@ -47,7 +47,7 @@ model Slot {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   @@unique([doctorId, startTime])
-  appointment Appointment?
+  appointments Appointment[]
 }
 
 enum AppointmentStatus {
@@ -63,11 +63,12 @@ model Appointment {
   patientId Int
   patient   Patient @relation(fields: [patientId], references: [id])
 
-  slotId Int  @unique // one to one relation one appointment have one slot.
+  slotId Int
   slot   Slot @relation(fields: [slotId], references: [id])
 
   status AppointmentStatus @default(CONFIRMED)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  @@index([slotId])  // This is added for indexing.
 }
