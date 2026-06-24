@@ -6,7 +6,9 @@
   "scripts": {
     "seed": "node prisma/seed.js",
     "seed:slots": "node prisma/seed-slots.js",
-    "dev": "node src/app.js"
+    "dev": "node src/app.js",
+    "build": "npm install && prisma generate",
+    "start": "prisma migrate deploy && node src/app.js"
   },
   "keywords": [],
   "author": "",
